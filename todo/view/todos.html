@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form action="/todo/add" method="POST">
+        <input type="text" name="item" placeholder="Enter new todo...">
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        {{range .Todos}}
+        <li>
+            <input type="checkbox" {{if .Completed}}checked{{end}}> {{.Item}}
+            <form action="/todo/update" method="POST" style="display: inline;">
+                <input type="hidden" name="id" value="{{.ID}}">
+                <input type="text" name="item" value="{{.Item}}">
+                <button type="submit">Update</button>
+            </form>
+            <form action="/todo/delete" method="POST" style="display: inline;">
+                <input type="hidden" name="id" value="{{.ID}}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {{end}}
+    </ul>
+</body>
+</html>
