@@ -27,8 +27,7 @@ jobs:
       # テストの実行
       - name: Run Test
         run: |
-          echo "tree:"
-          tree
-          ls
+          cd todo_MVC_test
+          go test -v ./controller/
+          cd ../
           pwd
-          go test -v ./todo_MVC_test/controller/

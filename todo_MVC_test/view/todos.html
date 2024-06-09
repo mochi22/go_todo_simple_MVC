@@ -13,7 +13,7 @@
     <ul>
         {{range .Todos}}
         <li>
-            <input type="checkbox" {{if .Completed}}checked{{end}}> {{.Item}}:{{.ID}}
+            <input type="checkbox" {{if .Completed}}checked{{end}}> {{.Item}}::{{.ID}}
             <form action="/todo/update" method="POST" style="display: inline;">
                 <input type="hidden" name="id" value="{{.ID}}">
                 <input type="text" name="item" value="{{.Item}}">
