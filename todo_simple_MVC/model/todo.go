@@ -1,11 +1,9 @@
 package model
 
-
-
 type Todo struct {
-	ID int
-	Item string
+	ID        int
+	Item      string
 	Completed bool
 }
 
-var todos []Todo
+// var todos []Todo
