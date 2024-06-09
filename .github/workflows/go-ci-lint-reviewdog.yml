@@ -31,8 +31,9 @@
 name: Reviewdog
 
 on:
+  push:
   pull_request:
-    types: [opened, synchronize]
+  
 
 jobs:
   golangci-lint:
