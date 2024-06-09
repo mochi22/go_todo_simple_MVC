@@ -8,8 +8,8 @@ type Todo struct {
 
 // var todos []Todo
 
-func AddTodoDB(item string, completed bool) error {
-	_, err := DB.Exec("INSERT INTO todos (item, completed) VALUES (?, ?)", item, completed)
+func AddTodoDB(id int, item string, completed bool) error {
+	_, err := DB.Exec("INSERT INTO todo (id, item, completed) VALUES (?, ?, ?)", id, item, completed)
 	if err != nil {
 		return err
 	}
@@ -17,7 +17,7 @@ func AddTodoDB(item string, completed bool) error {
 }
 
 func GetTodosDB() ([]Todo, error) {
-	rows, err := DB.Query("SELECT * FROM todos")
+	rows, err := DB.Query("SELECT * FROM todo")
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ func GetTodosDB() ([]Todo, error) {
 }
 
 func UpdateTodoDB(id int, item string, completed bool) error {
-	_, err := DB.Exec("UPDATE todos SET item=?, completed=? WHERE id=?", item, completed, id)
+	_, err := DB.Exec("UPDATE todo SET item=?, completed=? WHERE id=?", item, completed, id)
 	if err != nil {
 		return err
 	}
@@ -44,7 +44,7 @@ func UpdateTodoDB(id int, item string, completed bool) error {
 }
 
 func DeleteTodoDB(id int) error {
-	_, err := DB.Exec("DELETE FROM todos WHERE id=?", id)
+	_, err := DB.Exec("DELETE FROM todo WHERE id=?", id)
 	if err != nil {
 		return err
 	}

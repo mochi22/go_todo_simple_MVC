@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"time"
 	"todo/model"
 )
 
@@ -18,7 +19,7 @@ func prepareData(w http.ResponseWriter) ViewData {
 	todos, err := model.GetTodosDB()
 	if err != nil {
 		// エラーの場合の処理を記述する（例: エラーページを表示する）
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		// http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 
 	// ViewDataという構造体を作成し、todosスライスを格納する
@@ -29,8 +30,6 @@ func prepareData(w http.ResponseWriter) ViewData {
 }
 
 // var todos []model.Todo
-
-var Current_id int
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data ViewData) error {
 	t, err := template.ParseFiles("view/" + tmpl)
@@ -55,12 +54,15 @@ func AddTodo(w http.ResponseWriter, r *http.Request) {
 	// }
 	// todos = append(todos, todo)
 
-	err := model.AddTodoDB(item, false) // 新しいTodoは未完了で追加
+	// 一意にするのに、適当にunixtimeを使用。
+	Current_id := int(time.Now().Unix())
+
+	err := model.AddTodoDB(Current_id, item, false) // 新しいTodoは未完了で追加
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	Current_id += 1
+	// Current_id += 1
 	// 一覧ページにリダイレクトする
 	http.Redirect(w, r, "/todo", http.StatusFound)
 }
