@@ -2,7 +2,9 @@
 name: Golangci-lint ReviewDog 
 
 on:
+  push:
   pull_request:
+  
 
 # ジョブ定義
 jobs:
@@ -24,5 +26,4 @@ jobs:
           reporter: github-pr-review
           # Github Status へのレポートレベルの指定
           level: warning
-          # golangci_lint_flags: "--config=./golang-test-ci.yml"
-          eslint_flags: 'src/**/*.{go}'
+          golangci_lint_flags: "--config=./golang-test-ci.yml"
