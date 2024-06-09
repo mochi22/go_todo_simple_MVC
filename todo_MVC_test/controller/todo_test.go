@@ -6,7 +6,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-	"todo/model"
+
+	"github.com/mochi22/go_tools/tree/main/todo_MVC_test/model"
 )
 
 func TestAddTodoTableDriven(t *testing.T) {
