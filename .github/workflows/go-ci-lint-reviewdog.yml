@@ -26,4 +26,4 @@ jobs:
           reporter: github-pr-review
           # Github Status へのレポートレベルの指定
           level: warning
-          golangci_lint_flags: "--config=.github/workflows/golang-test-ci.yml"
+          golangci_lint_flags: "--config=golang-test-ci.yml"
