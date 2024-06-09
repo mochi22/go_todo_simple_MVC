@@ -31,4 +31,4 @@ jobs:
           tree
           ls
           pwd
-          go test -v ./tree/main/todo_MVC_test/conrtoller/
+          go test -v ./todo_MVC_test/controller/
