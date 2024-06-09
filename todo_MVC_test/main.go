@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	mispell := "misspell"
+	println(mispell)
+
 	http.HandleFunc("/todo", controller.GetTodos)
 	http.HandleFunc("/todo/add", controller.AddTodo)
 	http.HandleFunc("/todo/update", controller.UpdateTodo)
