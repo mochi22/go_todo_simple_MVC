@@ -2,17 +2,24 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"todo/controller"
 	"todo/model"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 
+	dbUser, dbPassword, dbHost, dbPort, dbName := loadDB()
+	dbURI := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPassword, dbHost, dbPort, dbName)
+
 	// データベースとの接続を確立する
-	err := model.InitDB("root:Saqwedcxz22!@tcp(127.0.0.1:3306)/todoapp")
+	err := model.InitDB(dbURI)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,6 +30,23 @@ func main() {
 	http.HandleFunc("/todo/delete", controller.DeleteTodo)
 
 	http.ListenAndServe(":8080", nil)
+}
+
+func loadDB() (string, string, string, string, string) {
+	// .env ファイルの読み込み
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	// 環境変数からデータベース接続情報を取得
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+
+	return dbUser, dbPassword, dbHost, dbPort, dbName
 }
 
 // DB接続を以下のように記載する方法もある。
