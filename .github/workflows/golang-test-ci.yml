@@ -1,5 +1,5 @@
 # ワークフローの名前
-name: Go CI
+name: Go test CI
 
 #　push and pull_requestでトリガー
 on:
