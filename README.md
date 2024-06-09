@@ -13,3 +13,11 @@ add table driven test to todo_simple_MVC
 
 4. todo_MVC_mysql:
 add mysql to todo_simple_MVC
+
+## skills
+- CI/CD
+using github actions for CI/CD
+
+- DB
+mysql
+
